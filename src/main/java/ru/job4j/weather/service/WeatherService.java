@@ -18,7 +18,7 @@ public class WeatherService {
     private final Map<Integer, Weather> weathers = new ConcurrentHashMap<>();
 
     {
-        weathers.put(1, new Weather(1, "Msc", 15));
+        weathers.put(1, new Weather(1, "Msc", 20));
         weathers.put(2, new Weather(2, "SPb", 15));
         weathers.put(3, new Weather(3, "Bryansk", 14));
         weathers.put(4, new Weather(4, "Smolensk", 15));
