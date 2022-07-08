@@ -5,11 +5,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.job4j.weather.model.Weather;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Stream;
 
 @Service
 public class WeatherService {
@@ -27,7 +25,8 @@ public class WeatherService {
 
     public Weather hottest() {
         return weathers.values().stream()
-                .max(Comparator.comparing(Weather::getTemperature)).orElseThrow();
+                .max(Comparator.comparing(Weather::getTemperature))
+                .orElseThrow();
     }
 
     public Mono<Weather> findById(Integer id) {
