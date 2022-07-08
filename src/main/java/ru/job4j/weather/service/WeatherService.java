@@ -1,10 +1,13 @@
 package ru.job4j.weather.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
 import ru.job4j.weather.model.Weather;
 
+import java.time.Duration;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +24,10 @@ public class WeatherService {
         weathers.put(4, new Weather(4, "Smolensk", 15));
         weathers.put(5, new Weather(5, "Kiev", 10));
         weathers.put(6, new Weather(6, "Minsk", 11));
+    }
+
+    public Flux<Weather> temp(Integer t) {
+        return all().filter(a -> a.getTemperature() > t);
     }
 
     public Weather hottest() {

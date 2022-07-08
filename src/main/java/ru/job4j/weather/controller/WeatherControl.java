@@ -1,4 +1,4 @@
-package ru.job4j.weather;
+package ru.job4j.weather.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -16,7 +16,6 @@ import reactor.util.function.Tuple2;
 import ru.job4j.weather.model.Weather;
 import ru.job4j.weather.service.WeatherService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Duration;
@@ -52,9 +51,8 @@ public class WeatherControl {
 
     @GetMapping(value = "/cityGreatThen/{t}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Weather> temp(@PathVariable Integer t) {
-        Flux<Weather> data = weathers.all().filter(a -> a.getTemperature() > t);
         Flux<Long> delay = Flux.interval(Duration.ofSeconds(1));
-        return Flux.zip(data, delay).map(Tuple2::getT1);
+        return Flux.zip(temp(t), delay).map(Tuple2::getT1);
     }
 
     @GetMapping(value = "/hottest")
